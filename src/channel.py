@@ -36,9 +36,9 @@ class Channel:
             "title": self.title,
             "description": self.description,
             "url": self.url,
-            "subscribers_count": self.subscribers_count,
+            "subscriber_count": self.subscriber_count,
             "video_count": self.video_count,
             "view_count": self.view_count
         }
         with open(filename, "w", encoding="windows-1251") as file:
-            json.dumps(data, file, indent=2, ensure_ascii=False)
+            json.dump(data, file, indent=2, ensure_ascii=False)
