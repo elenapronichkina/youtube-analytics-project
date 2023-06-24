@@ -40,5 +40,5 @@ class Channel:
             "video_count": self.video_count,
             "view_count": self.view_count
         }
-        with open(filename, "w", encoding="windows-1251") as file:
+        with open(filename, "w", encoding="UTF-8") as file:
             json.dump(data, file, indent=2, ensure_ascii=False)
