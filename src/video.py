@@ -11,11 +11,11 @@ class Video(Channel):
 
             video_response = self.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                id=self.video_id).execute()
-        except FileNotFoundError:
-            raise FileNotFoundError("Неверный id")
-            self.broken_video_id = broken_video_id  # id видео
+            self.video_id = video_id  # id видео
+            self.video_title = video_response['items'][0]['snippet']['title']  # название видео
+        except IndexError:
             self.video = None
-            self.video_title = None  # название видео
+            self.video_title = None
             self.url_video = None  # ссылка на видео
             self.view_count = None  # количество просмотров
             self.like_count = None  # количество лайков
@@ -26,7 +26,7 @@ class Video(Channel):
                                      maxResults=50,).execute()
             self.video_id = video_id # id видео
             self.video = [video['contentDetails']['videoId'] for video in playlist_videos['items']]
-            self.video_title = video_response['items'][0]['snippet']['title']  # название видео
+
             self.url_video = f"https://www.youtube.com/channel/{channel_id}/{video_id}"# ссылка на видео
             self.view_count = int(self.video_response['items'][0]['statistics']['viewCount']) # количество просмотров
             self.like_count = int(self.video_response['items'][0]['statistics']['likeCount'])  # количество лайков
